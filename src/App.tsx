@@ -47,10 +47,11 @@ function reducer(state: State, action: ActionType) {
       return { ...state };
     case 'addsubtask':
       const arr3 = state;
-      arr3.data[action.payload.index].task.push({
+      const obj: SubTask = {
         name: action.payload.value,
         idDone: false,
-      });
+      };
+      arr3.data[action.payload.index].task.push(obj);
       return { ...arr3 };
     default:
       return state;
@@ -157,9 +158,9 @@ const App: React.FC = () => {
     const render: any[] = [];
     const data: Task = state.data[index];
     // console.log(data);
-    data.task.map((value) => {
+    data.task.map((value, index) => {
       render.push(
-        <Row>
+        <Row key={1}>
           <Col span={16}>
             <Typography.Text>{value.name}</Typography.Text>
           </Col>
